@@ -5,9 +5,13 @@
    --score-color: #fcbf49;
    --current-score-backg-color: #fd6a94;
    --current-score-color: #ddd;
+   --input-color: #fbbe6b;
+   --player-winner: #2f2f2f;
+   --player-winner-name: #c7365f;
    --background-gradient-1: #fbbe6b;
    --background-gradient-2: #f13ea3;
    --main-background-color: #1d3557;
+   --btn-color: #444;
 }
 
 * {
@@ -115,4 +119,107 @@ main {
 
 .current-score{
    font-size: 4rem;
+}
+
+/******* Absolute positioned elements */
+
+.btn{
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+
+   color: var(--btn-color);
+   background: none;
+   border: none;
+   
+   font-family: inherit;
+   font-size: 1.8rem;
+   font-weight: 500;
+   text-transform: uppercase;
+
+   cursor: pointer;
+   transition: all 0.2s;
+
+   background-color: white;
+   background-color: rgba(255, 255, 255, 0.6);
+   backdrop-filter: blur(10px);
+
+   padding: 0.7rem 2.5rem;
+   border-radius: 50rem;
+   box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+}
+
+.btn::first-letter{
+   font-size: 2.4rem;
+   display: inline-block;
+   margin-right: 0.3rem;
+}
+
+.btn--new{
+   top: 4rem;
+}
+
+.btn--roll{
+   top: 33.3rem;
+}
+
+.btn--hold{
+   top: 39.1rem;
+}
+
+.btn--input--number{
+   top: 4.5rem;
+}
+
+.btn:active{
+   transform: translate(-50%, 3px);
+   box-shadow: 0 1rem 2rem rgb(0 0 0 / 30%);
+}
+
+.input{
+   position: absolute;
+   left: 50%;
+   transform: translateX(-50%);
+
+   top: 49rem;
+}
+
+.input-number{
+   border-radius: 8px;
+   padding: 0.7rem;
+   text-align: center;
+   background-color: var(--input-color);
+   color: #000;
+   border: none;
+   outline: none;
+}
+
+.input-number:focus-visible{
+   box-shadow: 0 1rem 2rem rgb(0 0 0 / 30%);
+}
+
+.input-number::placeholder{
+   color: rgb(88, 88, 88);
+}
+
+.dice{
+   position: absolute;
+   left: 50%;
+   top: 16rem;
+   transform: translateX(-50%);
+
+   height: 13rem;
+}
+
+.player--winner {
+   background-color: var(--player-winner);
+}
+
+.player--winner .name {
+   font-weight: 700;
+   color: var(--player-winner-name);
+}
+
+.hidden{
+   display: none;
 }
