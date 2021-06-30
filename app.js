@@ -17,19 +17,21 @@ const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
 const btnGo = document.querySelector('.btn--input--number');
 
+
+const MIN_SCORE = 10;
+let MAX_SCORE = 20;
+
 let scores, //Array
-   maxScore, // Score to win
    currentScore,
    activePlayer,
-   playing;
+   playing; // Boolean
 
 
 const init = function () {
    scores = [0, 0];
-   maxScore = 0;
    currentScore = 0;
    activePlayer = 0;
-   playing = 0; //To know if the game continues.
+   playing = false; //To know if the game continues.
 
    score0El.textContent = 0;
    score1El.textContent = 0;
@@ -55,4 +57,52 @@ const switchPlayer = function () {
    player1El.classList.toggle('player--active');
 }
 
+const showError = function (errorMsg = 'Something went wrong') {
+   console.log(errorMsg); //Change to an ALERT WINDOW
+}
+
+/*************** Winning Score ******** */
+
+const setWinScore = function (winningScore) {
+
+   if (winningScore < MIN_SCORE) {
+      showError(`${winningScore} it's a low number. Please, choose a bigger one.`);
+      // playing = false;
+   }
+   else {
+      playing = true;
+      MAX_SCORE = winningScore;
+   }
+}
+
 /*************** ROLL DICE ******** */
+
+btnRoll.addEventListener('click', function () {
+   if (playing) {
+
+      // 1.Generate a random dice
+      const dice = Math.trunc(Math.random() * 6) + 1;
+      console.log(dice);
+
+      // 2.Display Dice roll
+      diceEl.classList.remove('hidden');
+      diceEl.src = `img/dice-${dice}.png`;
+
+      // 3.It is 1 ?
+      if (dice != 1) {
+         currentScore += dice;
+         document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+      } else
+         switchPlayer();
+
+   } else
+      showError('Please, choose a Win Score first.');
+});
+
+
+btnGo.addEventListener('click', function () {
+   if (!playing)
+      setWinScore(+winNumberEl.value);
+   else
+      showError('Please, finish the actual game first or press \'New Game\'');
+});
