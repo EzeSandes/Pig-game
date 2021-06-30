@@ -6,8 +6,10 @@
    --current-score-backg-color: #fd6a94;
    --current-score-color: #ddd;
    --input-color: #fbbe6b;
-   --player-winner: #2f2f2f;
-   --player-winner-name: #c7365f;
+   /* --player-winner: #52b788; */
+   --player-winner: #2b9348;
+   --player-winner-name: #f1faee;
+   --player-winner-score: #f1faee;
    --background-gradient-1: #fbbe6b;
    --background-gradient-2: #f13ea3;
    --main-background-color: #1d3557;
@@ -216,8 +218,13 @@ main {
 }
 
 .player--winner .name {
+   font-size: 6rem;
    font-weight: 700;
    color: var(--player-winner-name);
+}
+
+.player--winner .score{
+   color: var(--player-winner-score);
 }
 
 .hidden{
