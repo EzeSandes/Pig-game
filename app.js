@@ -92,7 +92,7 @@ btnRoll.addEventListener('click', function () {
          switchPlayer();
 
    } else
-      showError('Please, choose a Win Score first.');
+      showError('Please, choose a Winning Score first.');
 });
 
 /*************** btn Hold ******** */
