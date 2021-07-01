@@ -218,12 +218,13 @@ main {
 }
 
 .player--winner .name {
-   font-size: 6rem;
+   font-size: 5rem;
    font-weight: 700;
    color: var(--player-winner-name);
 }
 
 .player--winner .score{
+   font-size: 6rem;
    color: var(--player-winner-score);
 }
 

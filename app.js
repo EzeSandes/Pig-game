@@ -19,7 +19,7 @@ const btnGo = document.querySelector('.btn--input--number');
 
 
 const MIN_SCORE = 10;
-let MAX_SCORE = 20;
+let MAX_SCORE;
 
 let scores, //Array
    currentScore,
@@ -47,28 +47,25 @@ const init = function () {
    player1El.classList.remove('player--active');
 };
 
-init();
 
 const switchPlayer = function () {
    document.getElementById(`current--${activePlayer}`).textContent = 0;
-
    activePlayer = activePlayer === 0 ? 1 : 0;
+   currentScore = 0;
    player0El.classList.toggle('player--active');
    player1El.classList.toggle('player--active');
 }
 
 const showError = function (errorMsg = 'Something went wrong') {
-   console.log(errorMsg); //Change to an ALERT WINDOW
+   alert(errorMsg);
 }
 
 /*************** Winning Score ******** */
 
 const setWinScore = function (winningScore) {
 
-   if (winningScore < MIN_SCORE) {
+   if (winningScore < MIN_SCORE)
       showError(`${winningScore} it's a low number. Please, choose a bigger one.`);
-      // playing = false;
-   }
    else {
       playing = true;
       MAX_SCORE = winningScore;
@@ -82,7 +79,6 @@ btnRoll.addEventListener('click', function () {
 
       // 1.Generate a random dice
       const dice = Math.trunc(Math.random() * 6) + 1;
-      console.log(dice);
 
       // 2.Display Dice roll
       diceEl.classList.remove('hidden');
@@ -99,10 +95,39 @@ btnRoll.addEventListener('click', function () {
       showError('Please, choose a Win Score first.');
 });
 
+/*************** btn Hold ******** */
+
+btnHold.addEventListener('click', function () {
+   if (playing) {
+      scores[activePlayer] += currentScore;
+      document.getElementById(`score--${activePlayer}`).textContent = scores[activePlayer];
+
+      if (scores[activePlayer] >= MAX_SCORE) {
+         playing = false;
+         diceEl.classList.add('hidden');
+         document.getElementById(`score--${activePlayer}`).textContent = 'WINNER🥳';
+         document.querySelector(`.player--${activePlayer}`).classList.add('player--winner');
+         document.querySelector(`.player--${activePlayer}`).classList.remove('player--active');
+      }
+
+      switchPlayer();
+   } else
+      showError('Start a game, please.');
+});
+
+/*************** btn Let's GO! ******** */
 
 btnGo.addEventListener('click', function () {
-   if (!playing)
+   if (!playing) {
+      init();
       setWinScore(+winNumberEl.value);
+   }
    else
       showError('Please, finish the actual game first or press \'New Game\'');
 });
+
+/*************** btn NEW GAME ******** */
+
+btnNew.addEventListener('click', init);
+
+init();
